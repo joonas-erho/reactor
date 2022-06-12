@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class GameController : MonoBehaviour
@@ -15,6 +17,8 @@ public class GameController : MonoBehaviour
     public GameObject gameOverCanvas;
     public TextMeshProUGUI finalScoreText;
     public HealthBar healthBar;
+    public Button tryAgainButton;
+    public Button returnButton;
     private Coroutine coroutine;
     
     
@@ -47,6 +51,9 @@ public class GameController : MonoBehaviour
     private int score = 0;
 
     public void Start() {
+        tryAgainButton.onClick.AddListener(TryAgain);
+        returnButton.onClick.AddListener(ReturnToLevelSelect);
+
         // Set level name to appear.
         levelName.text = set.setName;
 
@@ -147,5 +154,13 @@ public class GameController : MonoBehaviour
 
     public bool IsGameOver() {
         return gameOver;
+    }
+
+    public void ReturnToLevelSelect() {
+
+    }
+
+    public void TryAgain() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

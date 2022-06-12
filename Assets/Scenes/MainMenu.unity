@@ -502,7 +502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playButton: {fileID: 1829673633}
-  quitButton: {fileID: 0}
+  quitButton: {fileID: 12258347}
 --- !u!4 &705127502
 Transform:
   m_ObjectHideFlags: 0
