@@ -1,12 +1,12 @@
 /// <summary>
 /// Health Bar
-/// Joonas Erho, 2022
+/// Joonas Erho, 12.6.2022
 /// 
 /// This class controls the health bar visible in the gameplay screen.
 /// It updates it's color and width with values given from GameController.
 /// This class is also responsible for ending the game if time runs out.
 /// </summary>
-/// 
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

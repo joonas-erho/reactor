@@ -1,3 +1,11 @@
+/// <summary>
+/// Game Controller
+/// Joonas Erho, 14.6.2022
+/// 
+/// This class controls the majority of gameplay, including components in the
+/// level, health, timing and scoring.
+/// </summary>
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,7 +29,6 @@ public class GameController : MonoBehaviour
     public Button returnButton;
     private Coroutine coroutine;
     
-    
     // Delay between symbol changes on the constantly changing symbol.
     public float startingTimeDelay;
 
@@ -34,10 +41,8 @@ public class GameController : MonoBehaviour
     // The delay can never go below this value
     public float minimumDelay;
 
-
     // Amount of sprites in our set. Calculated once at start for convenience.
     private int spriteAmount;
-
 
     // The ID (index) of each symbol. Changes as the sprites change.
     [SerializeField] private int changingId = -1;
@@ -45,12 +50,20 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private float currentTimeDelay;
 
-
     // Game Variables
     private bool gameOver = false;
     private int score = 0;
 
+    // Public getter for game over.
+    public bool IsGameOver() {
+        return gameOver;
+    }
+
     public void Start() {
+        // This seems to be necessary as scenes are loaded. Effectively does nothing.
+        Time.timeScale = 1;
+
+        // Add listeners to buttons shown when game has ended.
         tryAgainButton.onClick.AddListener(TryAgain);
         returnButton.onClick.AddListener(ReturnToLevelSelect);
 
@@ -80,8 +93,8 @@ public class GameController : MonoBehaviour
                 score++;
                 scoreText.text = score.ToString();
 
-                // Decrease delay. Also decrease the change in delay, so that the amount of milliseconds
-                // that the delay is changed scales down.
+                // Decrease delay. Also decrease the change in delay, so that the amount of
+                // milliseconds that the delay is changed scales down.
                 currentTimeDelay -= delayChange;
                 delayChange *= delayMultiplier;
 
@@ -107,11 +120,16 @@ public class GameController : MonoBehaviour
     /// </summary>
     /// <returns>Nothing.</returns>
     IEnumerator ChangeSymbols() {
-        // Create a list of sprites that have already been shown.
+        // Create a list of sprites that have already been shown to ensure player always getting
+        // two chances at reacting to the correct combination.
         List<int> spritesShown = new List<int>();
+
+        // Change symbols until game is over.
         while(!gameOver) {
-            // Make sure the new value is different from the past one.
+            // Store current sprite id.
             int currentId = changingId;
+
+            // While the new sprite is not a good value, try again until we get a good one.
             while(true) {
                 changingId = (Random.Range(0, spriteAmount) + 1) % spriteAmount;
                 if (spritesShown.Contains(changingId) || changingId == currentId) {
@@ -122,10 +140,15 @@ public class GameController : MonoBehaviour
                     break;
                 }
             };
+
+            // Change the sprite and store its value to the list of sprites already shown, unless
+            // list is full, in which case clear it.
             srChanging.sprite = set.sprites[changingId];
             if (spritesShown.Count == spriteAmount) {
                 spritesShown.Clear();
             }
+
+            // Wait until the next cycle. This time decreases (gets faster) as more score is gained.
             yield return new WaitForSeconds(currentTimeDelay);
         } 
     }
@@ -152,15 +175,17 @@ public class GameController : MonoBehaviour
         gameOverCanvas.SetActive(true);
     }
 
-    public bool IsGameOver() {
-        return gameOver;
-    }
-
-    public void ReturnToLevelSelect() {
-
-    }
-
+    /// <summary>
+    /// Reloads the gameplay scene.
+    /// </summary>
     public void TryAgain() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    /// <summary>
+    /// Not yet implemented.
+    /// </summary>
+    public void ReturnToLevelSelect() {
+
     }
 }

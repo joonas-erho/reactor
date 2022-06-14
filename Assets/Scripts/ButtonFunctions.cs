@@ -1,7 +1,15 @@
+/// <summary>
+/// Button Functions
+/// Joonas Erho, 12.6.2022
+/// 
+/// Contains functionality for main menu buttons.
+/// </summary>
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ButtonFunctions : MonoBehaviour
 {
@@ -9,11 +17,13 @@ public class ButtonFunctions : MonoBehaviour
     public Button quitButton;
 
     void Start() {
-        playButton.onClick.AddListener(LoadLevelSelect);
+        playButton.onClick.AddListener(LoadLevel);
+        quitButton.onClick.AddListener(Quit);
     }
 
-    public void LoadLevelSelect() {
-        Debug.Log("yee");
+    // Loads the main gameplay level.
+    public void LoadLevel() {
+        SceneManager.LoadScene("Gameplay");
     }
 
     public void Quit() {
