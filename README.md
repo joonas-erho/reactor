@@ -1,5 +1,5 @@
 # Reactor
-Play the game [here](users.jyu.fi/~joalerho/games/reactor/)!!
+Play the game [here](http://users.jyu.fi/~joalerho/games/reactor/)!!
 
 Game prototype #1 for JYU's Game Design Challenge course. The course brochure (mostly in Finnish) can be found [here](https://sisu.jyu.fi/student/courseunit/otm-4c3ee968-c6ab-4cd0-b70a-874767e2e43c/brochure).
 
