@@ -18,3 +18,6 @@ Game prototype #1 for the Game Design Challenge course at  the University of Jyv
 This game is a prototype for the first cycle of the course. The special requirement for this cycle was "one button". The game must work in a fashion that it can be played with one button only.
 
 In Reactor, players can choose different sets of symbols and then challenge their reactive abilities. The screen will portray one symbol, the target symbol, and another symbol that changes constantly. When the symbols are the same, the player must press Spacebar and upon success, gains a point and the game speeds up. The game also has a timer, meaning a player will also lose if they don't react in time.
+
+Screenshot:
+![image](https://user-images.githubusercontent.com/63057682/213728741-9e3d0432-949e-49bf-a39e-f2f07cbccc30.png)
